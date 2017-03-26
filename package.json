@@ -1,7 +1,7 @@
 {
   "name": "duplicate-removel",
   "version": "1.0.2",
-  "description": "文件去重,尝试命令行工具开发",
+  "description": "去除文件夹下重复的文件",
   "main": "dr.js",
   "bin": {
     "dr": "./dr.js"
