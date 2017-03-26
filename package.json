@@ -1,6 +1,6 @@
 {
   "name": "duplicate-removel",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "去除文件夹下重复的文件",
   "main": "dr.js",
   "bin": {
