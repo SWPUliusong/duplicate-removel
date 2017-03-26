@@ -29,10 +29,13 @@ console.log('')
 filter.file({
     ignore: program.ignore && program.ignore.split(','),
     short: program.short
-}).then(function (files) {
+}).then(files => {
     if (!files.length) return console.log('没有重复的文件')
-    return del(files)
-}).then((files) => {
+    return del(files).then(paths => {
+        if (!paths.length) return filter.rf(files)
+        return Promise.resolve(paths)
+    })
+}).then(files => {
     if (files && files.length) {
         console.log('以下重复文件被删除: ')
         let msg = files.join(postfix)
@@ -48,7 +51,7 @@ filter.file({
     }
 }).then(dirs => {
     return del(dirs)
-}).then((dirs) => {
+}).then(dirs => {
     if (!dirs.length) return console.log('没有空白的文件夹')
     console.log('以下空白文件夹被删除: ')
     let msg = dirs.join(postfix)
