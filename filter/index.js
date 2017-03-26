@@ -7,5 +7,3 @@ exports.dir = (function(cwd) {
         return dir(cwd, config)
     }
 })(process.cwd())
-
-exports.rf = require("./rf")

@@ -31,4 +31,6 @@
 
 ***注意***
 
-    此工具用到了Linux下的du命令,所以请在Linux环境下使用(ps: Windows下的git Bash也行,亲测有效)
+1.此工具用到了Linux下的du命令,所以请在Linux环境下使用(ps: Windows下的git Bash也行,亲测有效)
+
+2.对于windows下带有某些特殊符号的路径,del模块无法删除,会启用nodejs的fs模块自带的rmdir方法删除,所以有时会造成多层嵌套的空目录无法删除

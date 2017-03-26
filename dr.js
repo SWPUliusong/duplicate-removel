@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 
 const program = require("commander")
+const del = require("del")  // 删除文件和文件夹的模块
+
 const filter = require("./filter")
-const del = require("del")
+const rm = require("./remove")  // 备用删除方案
 
 // 定义命令行参数和帮助文档
 program
@@ -32,7 +34,8 @@ filter.file({
 }).then(files => {
     if (!files.length) return console.log('没有重复的文件')
     return del(files).then(paths => {
-        if (!paths.length) return filter.rf(files)
+        // 当del并没有删除筛选出的重复文件时启用备用方案
+        if (!paths.length) return rm.file(files)
         return Promise.resolve(paths)
     })
 }).then(files => {
@@ -50,9 +53,13 @@ filter.file({
         return Promise.reject('空白文件夹被保留')
     }
 }).then(dirs => {
-    return del(dirs)
+    return del(dirs).then(paths => {
+        // 当del并没有删除筛选出的空目录时启用备用方案
+        if (!paths.length && dirs.length) return rm.dir(dirs)
+        return Promise.resolve(paths)
+    })
 }).then(dirs => {
-    if (!dirs.length) return console.log('没有空白的文件夹')
+    if (!dirs.length) return console.log('没有空白文件夹被删除')
     console.log('以下空白文件夹被删除: ')
     let msg = dirs.join(postfix)
     console.log(msg + postfix)

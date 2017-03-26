@@ -4,7 +4,7 @@ module.exports = function (files) {
     let _pending = 0
 
     return new Promise((resolve, reject) => {
-        if (files.length === 0) return resolve(0)
+        if (files.length === 0) return resolve(files)
 
         files.forEach(file => {
             _pending++
