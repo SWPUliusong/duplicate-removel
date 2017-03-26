@@ -1,0 +1,27 @@
+{
+  "name": "duplicate-removel",
+  "version": "1.0.0",
+  "description": "文件去重,尝试命令行工具开发",
+  "main": "dr.js",
+  "bin": {
+    "dr": "./dr.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SWPUliusong/duplicate-removel.git"
+  },
+  "author": "SWPUliusong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SWPUliusong/duplicate-removel/issues"
+  },
+  "homepage": "https://github.com/SWPUliusong/duplicate-removel#readme",
+  "dependencies": {
+    "co": "^4.6.0",
+    "commander": "^2.9.0",
+    "del": "^2.2.2"
+  }
+}

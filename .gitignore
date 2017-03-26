@@ -1,0 +1,6 @@
+# exclude ide file
+*.vscode
+
+# node modules file
+node_modules/
+npm-debug.log
