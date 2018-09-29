@@ -16,17 +16,17 @@
 
   Options:
 
-    -h, --help              output usage information
     -V, --version           output the version number
+    -V, --version           工具版本号
     -i, --ignore <dirname>  忽略的文件夹(以,连接多个)
-    -s, --short             路径深度更小或名字更短的优先保留
-    -a, --allow-empty       允许空文件夹存在 (默认删除空文件夹)
+    -r, --reomve            是否直接删除重复文件(默认移动到统一文件夹)
+    -h, --help              output usage information
 
   Example:
 
-   $ dr -s
-   $ dr -i node_modules,.git
-   $ dr -i node_modules,.git -s
+    $ dr -i node_modules,.git
+    $ dr -i node_modules,.git -r
+
 ```
 
 ***注意***
