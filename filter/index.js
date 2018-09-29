@@ -1,9 +1,5 @@
 const dir = require("./filterDir")
 
-exports.file = require("./filterFile")
+exports.filePaths = require("./filterFile")
 
-exports.dir = (function(cwd) {
-    return function(config) {
-        return dir(cwd, config)
-    }
-})(process.cwd())
+exports.dirPaths = require("./filterDir")

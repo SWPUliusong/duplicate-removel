@@ -1,6 +1,6 @@
 {
   "name": "duplicate-removel",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "去除文件夹下重复的文件",
   "main": "dr.js",
   "bin": {
@@ -20,7 +20,6 @@
   },
   "homepage": "https://github.com/SWPUliusong/duplicate-removel#readme",
   "dependencies": {
-    "co": "^4.6.0",
     "commander": "^2.9.0",
     "del": "^2.2.2"
   }

@@ -1,7 +1,6 @@
 const path = require("path")
 const fs = require("fs")
 const exec = require("child_process").exec
-const co = require("co")
 
 let stat, args;
 
@@ -19,26 +18,15 @@ function emptyCheck(dir) {
     })
 }
 
-function filterDir(dir, _result, opts) {
-    args = [].slice.call(arguments)
-    return co(function* () {
-        if (args.length === 2) {
-            opts = _result;
-            _result = null;
-        }
-
-        _result = _result || [];
-        opts = opts || {};
-
-        try {
-            stat = fs.lstatSync(dir);
-        } catch (err) {
-            throw err;
-        };
-
+async function filterDir(dir, opts = {}) {
+    try {
+        let stat = fs.lstatSync(dir);
+        let result = []
         if (stat.isDirectory()) {
-            if ((yield emptyCheck(dir)) && process.cwd() !== dir) _result.push(dir)
-            else {
+            let isEmpty = await emptyCheck(dir)
+            if (isEmpty && process.cwd() !== dir) {
+                return [dir]
+            } else {
                 let subDirs = fs.readdirSync(dir);
                 // 忽略ignore指明的文件夹
                 if (opts.ignore instanceof Array) {
@@ -46,14 +34,16 @@ function filterDir(dir, _result, opts) {
                         return opts.ignore.indexOf(dirname) === -1
                     })
                 }
-
                 for (let i = 0, len = subDirs.length; i < len; i++) {
-                    _result = yield filterDir(path.join(dir, subDirs[i]), _result, opts);
+                    let dirArr = await filterDir(path.join(dir, subDirs[i]), opts);
+                    result = result.concat(dirArr)
                 }
             }
         }
-        return _result
-    })
-};
+        return result
+    } catch (err) {
+        throw err;
+    };
+}
 
 module.exports = filterDir
